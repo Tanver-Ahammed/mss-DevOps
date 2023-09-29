@@ -35,3 +35,21 @@ docker rmi 52ec5558e954
 docker build .
 docker build -t tanver .
 docker build -t my-image:tanver .
+
+# docker command using port, volume mapping in mysql container
+docker run -d \
+--name mysql \
+-e MYSQL_ROOT_PASSWORD=12345 \
+-v /home/tanver/Documents/Software/Backup-DB/mysql:/var/lib/mysql \
+-p 3306:3306 \
+mysql:latest
+
+# docker command using port, volume mapping in postgrescontainer
+docker run -d \
+--name postgres \
+-e POSTGRES_PASSWORD=12345 \
+-e POSTGRES_USER=postgres \
+-v /home/tanver/Documents/Software/Backup-DB/postgres:/var/lib/postgresql/data \
+-p 5432:5432 \
+postgres:latest
+
