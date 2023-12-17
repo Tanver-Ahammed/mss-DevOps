@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  my-py-app:
+    image: my-py-app
+    command: python app.py
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7000:5000"
+    volumes:
+      - ".:/app"
+    env_file: .env
+    environment:
+      - WEBAPP_VERSION=production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+      start_period: 10s
+
+# networks:
+
+# secrets:
+
+# volumes:
