@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   my-py-app:
-    image: my-py-app
+    image: tanverit16/my-py-app:v2
     command: python app.py
     build:
       context: .
@@ -12,16 +12,35 @@ services:
     volumes:
       - ".:/app"
     env_file: .env
+    restart: on-failure
     environment:
       - WEBAPP_VERSION=production
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
-      interval: 10s
+      test: curl http://localhost:5000/
+      interval: 5s
       timeout: 15s
       retries: 5
-      start_period: 10s
+      start_period: 2s
+    networks:
+      - mypyappnetwork
+    depends_on:
+      - db
 
-# networks:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: test
+      MYSQL_USER: root
+    ports:
+      - "3307:3306"
+    networks:
+      - mypyappnetwork
+    restart: on-failure
+
+networks:
+  mypyappnetwork:
+    driver: bridge
 
 # secrets:
 
