@@ -17,7 +17,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Create a new image with a smaller base image
-FROM openjdk:17
+FROM amazoncorretto:17-alpine3.16
 
 # Set the working directory in the container
 WORKDIR /app
