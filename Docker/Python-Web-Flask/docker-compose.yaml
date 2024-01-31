@@ -31,7 +31,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: test
-      MYSQL_USER: root
+      MYSQL_USER: py_user
     ports:
       - "3307:3306"
     networks:
