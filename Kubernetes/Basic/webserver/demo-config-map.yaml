@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-configmap
+  labels:
+    app: myapplication
+data:
+  initdb.sql: 
+    select * fropm product;
+    create table coupon();
+  keys:
+    12345 
+    oijiuih5ok

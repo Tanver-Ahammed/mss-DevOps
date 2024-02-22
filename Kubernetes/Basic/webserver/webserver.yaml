@@ -31,4 +31,27 @@ spec:
             limits:
               cpu: 100m
               memory: 100Mi
+          volumeMounts:
+            - name: demovol
+              mountPath: /data
+            - name: my-configmap
+              mountPath: /etc/config
+            - name: my-secret
+              mountPath: /etc/mysecret
+            - name: my-pvc
+              mountPath: /etc/mypvc
+      volumes:
+        - name: demovol
+          hostPath:
+            path: /data
+            type: Directory
+        - name: my-configmap
+          configMap:
+            name: demo-configmap
+        - name: my-secret
+          secret:
+            secretName: demo-secret
+        - name: my-pvc
+          persistentVolumeClaim:
+            claimName: demo-pvc
       restartPolicy: Always
