@@ -3,10 +3,10 @@
 
 Below are some useful Kubernetes commands.
 
+[# Run an nginx pod](#)
 ```bash
 kubectl run nginx --image=nginx
 ```
-[# Run an nginx pod](#)
 
 ```bash
 kubectl get pods
