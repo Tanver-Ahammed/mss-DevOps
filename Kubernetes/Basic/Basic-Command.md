@@ -1,49 +1,62 @@
 
-# Kubernetes Commands
+# Kubernetes Commands Description
 
-```bash
-# Run an nginx pod
-kubectl run nginx --image=nginx
+1. `kubectl run nginx --image=nginx`  
+   **Description**: Creates a pod running an nginx container.
+   **Copy**: `kubectl run nginx --image=nginx`
 
-# Get the list of pods
-kubectl get pods
+2. `kubectl get pods`  
+   **Description**: Lists all running pods in the default namespace.
+   **Copy**: `kubectl get pods`
 
-# Get the list of pods with detailed node information
-kubectl get pods -o wide
+3. `kubectl get pods -o wide`  
+   **Description**: Lists all running pods with additional information like node hosting the pod and IP.
+   **Copy**: `kubectl get pods -o wide`
 
-# Expose nginx pod as a service
-kubectl expose pods nginx --name=nginx-web --port=80 --type=NodePort
+4. `kubectl expose pods nginx --name=nginx-web --port=80 --type=NodePort`  
+   **Description**: Exposes the nginx pod as a service with NodePort on port 80.
+   **Copy**: `kubectl expose pods nginx --name=nginx-web --port=80 --type=NodePort`
 
-# Get the list of services
-kubectl get svc
+5. `kubectl get svc`  
+   **Description**: Lists all services in the current namespace.
+   **Copy**: `kubectl get svc`
 
-# Run an apache pod in the 'test' namespace
-kubectl run apache --image=httpd --namespace=test
+6. `kubectl run apache --image=httpd --namespace=test`  
+   **Description**: Creates a pod running an Apache HTTP server in the `test` namespace.
+   **Copy**: `kubectl run apache --image=httpd --namespace=test`
 
-# Expose apache pod as a service in the 'test' namespace
-kubectl expose pods apache --name=web --port=80 --type=NodePort --n=test
+7. `kubectl expose pods apache --name=web --port=80 --type=NodePort --n=test`  
+   **Description**: Exposes the Apache pod as a service with NodePort on port 80 in the `test` namespace.
+   **Copy**: `kubectl expose pods apache --name=web --port=80 --type=NodePort --n=test`
 
-# Generate nginx pod yaml configuration without creating the pod
-kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
+8. `kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml`  
+   **Description**: Generates the YAML configuration for an nginx pod without creating it, saving it to `pod.yaml`.
+   **Copy**: `kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml`
 
-# Create a deployment using the httpd image
-kubectl create deploy webserver --image=httpd 
+9. `kubectl create deploy webserver --image=httpd`  
+   **Description**: Creates a deployment running an Apache HTTP server.
+   **Copy**: `kubectl create deploy webserver --image=httpd`
 
-# Get the list of deployments
-kubectl get deploy
+10. `kubectl get deploy`  
+    **Description**: Lists all deployments in the current namespace.
+    **Copy**: `kubectl get deploy`
 
-# Scale a replica set to 25 replicas
-kubectl scale rs replicaset-1 --replicas=25
+11. `kubectl scale rs replicaset-1 --replicas=25`  
+    **Description**: Scales the replicaset named `replicaset-1` to 25 replicas.
+    **Copy**: `kubectl scale rs replicaset-1 --replicas=25`
 
-# Get the list of replica sets
-kubectl get rs
+12. `kubectl get rs`  
+    **Description**: Lists all ReplicaSets in the current namespace.
+    **Copy**: `kubectl get rs`
 
-# Taint node 'node01' with a 'NoSchedule' rule
-kubectl taint nodes node01 color=red:NoSchedule
+13. `kubectl taint nodes node01 color=red:NoSchedule`  
+    **Description**: Taints `node01` with the key `color`, value `red`, and effect `NoSchedule`.
+    **Copy**: `kubectl taint nodes node01 color=red:NoSchedule`
 
-# Describe the taints on 'node01'
-kubectl describe nodes node01 | grep -i taint
+14. `kubectl describe nodes node01 | grep -i taint`  
+    **Description**: Describes the `node01` node and filters the taints applied to it.
+    **Copy**: `kubectl describe nodes node01 | grep -i taint`
 
-# Label the 'controlplane' node with 'size=small'
-kubectl label nodes controlplane size=small
-```
+15. `kubectl label nodes controlplane size=small`  
+    **Description**: Labels the `controlplane` node with the label `size=small`.
+    **Copy**: `kubectl label nodes controlplane size=small`
