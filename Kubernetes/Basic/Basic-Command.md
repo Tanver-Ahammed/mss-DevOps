@@ -1,62 +1,79 @@
 
-# Kubernetes Commands Description
+# Kubernetes Command Cheat Sheet
 
-1. `kubectl run nginx --image=nginx`  
-   **Description**: Creates a pod running an nginx container.
-   **Copy**: `kubectl run nginx --image=nginx`
+Below are some useful Kubernetes commands.
 
-2. `kubectl get pods`  
-   **Description**: Lists all running pods in the default namespace.
-   **Copy**: `kubectl get pods`
+```bash
+kubectl run nginx --image=nginx
+```
+[Copy](#)
 
-3. `kubectl get pods -o wide`  
-   **Description**: Lists all running pods with additional information like node hosting the pod and IP.
-   **Copy**: `kubectl get pods -o wide`
+```bash
+kubectl get pods
+```
+[Copy](#)
 
-4. `kubectl expose pods nginx --name=nginx-web --port=80 --type=NodePort`  
-   **Description**: Exposes the nginx pod as a service with NodePort on port 80.
-   **Copy**: `kubectl expose pods nginx --name=nginx-web --port=80 --type=NodePort`
+```bash
+kubectl get pods -o wide
+```
+[Copy](#)
 
-5. `kubectl get svc`  
-   **Description**: Lists all services in the current namespace.
-   **Copy**: `kubectl get svc`
+```bash
+kubectl expose pods nginx --name=nginx-web --port=80 --type=NodePort
+```
+[Copy](#)
 
-6. `kubectl run apache --image=httpd --namespace=test`  
-   **Description**: Creates a pod running an Apache HTTP server in the `test` namespace.
-   **Copy**: `kubectl run apache --image=httpd --namespace=test`
+```bash
+kubectl get svc
+```
+[Copy](#)
 
-7. `kubectl expose pods apache --name=web --port=80 --type=NodePort --n=test`  
-   **Description**: Exposes the Apache pod as a service with NodePort on port 80 in the `test` namespace.
-   **Copy**: `kubectl expose pods apache --name=web --port=80 --type=NodePort --n=test`
+```bash
+kubectl run apache --image=httpd --namespace=test
+```
+[Copy](#)
 
-8. `kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml`  
-   **Description**: Generates the YAML configuration for an nginx pod without creating it, saving it to `pod.yaml`.
-   **Copy**: `kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml`
+```bash
+kubectl expose pods apache --name=web --port=80 --type=NodePort --n=test
+```
+[Copy](#)
 
-9. `kubectl create deploy webserver --image=httpd`  
-   **Description**: Creates a deployment running an Apache HTTP server.
-   **Copy**: `kubectl create deploy webserver --image=httpd`
+```bash
+kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
+```
+[Copy](#)
 
-10. `kubectl get deploy`  
-    **Description**: Lists all deployments in the current namespace.
-    **Copy**: `kubectl get deploy`
+```bash
+kubectl create deploy webserver --image=httpd
+```
+[Copy](#)
 
-11. `kubectl scale rs replicaset-1 --replicas=25`  
-    **Description**: Scales the replicaset named `replicaset-1` to 25 replicas.
-    **Copy**: `kubectl scale rs replicaset-1 --replicas=25`
+```bash
+kubectl get deploy
+```
+[Copy](#)
 
-12. `kubectl get rs`  
-    **Description**: Lists all ReplicaSets in the current namespace.
-    **Copy**: `kubectl get rs`
+```bash
+kubectl scale rs replicaset-1 --replicas=25
+```
+[Copy](#)
 
-13. `kubectl taint nodes node01 color=red:NoSchedule`  
-    **Description**: Taints `node01` with the key `color`, value `red`, and effect `NoSchedule`.
-    **Copy**: `kubectl taint nodes node01 color=red:NoSchedule`
+```bash
+kubectl get rs
+```
+[Copy](#)
 
-14. `kubectl describe nodes node01 | grep -i taint`  
-    **Description**: Describes the `node01` node and filters the taints applied to it.
-    **Copy**: `kubectl describe nodes node01 | grep -i taint`
+```bash
+kubectl taint nodes node01 color=red:NoSchedule
+```
+[Copy](#)
 
-15. `kubectl label nodes controlplane size=small`  
-    **Description**: Labels the `controlplane` node with the label `size=small`.
-    **Copy**: `kubectl label nodes controlplane size=small`
+```bash
+kubectl describe nodes node01 | grep -i taint
+```
+[Copy](#)
+
+```bash
+kubectl label nodes controlplane size=small
+```
+[Copy](#)
