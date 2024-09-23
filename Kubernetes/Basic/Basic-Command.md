@@ -6,7 +6,7 @@ Below are some useful Kubernetes commands.
 ```bash
 kubectl run nginx --image=nginx
 ```
-[Copy](#)
+[# Run an nginx pod](#)
 
 ```bash
 kubectl get pods
