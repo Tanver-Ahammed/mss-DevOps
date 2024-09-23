@@ -76,4 +76,3 @@ kubectl describe nodes node01 | grep -i taint
 ```bash
 kubectl label nodes controlplane size=small
 ```
-[Copy](#)
