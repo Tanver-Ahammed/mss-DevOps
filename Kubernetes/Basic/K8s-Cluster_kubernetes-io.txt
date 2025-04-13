@@ -1,0 +1,67 @@
+sudo swapoff -a
+sed -i '/swap/d' /etc/fstab
+
+sudo apt-get update && sudo apt-get upgrade -y
+
+Install Container Runtime:
+
+sudo apt-get install -y containerd
+sudo systemctl enable --now containerd
+
+Install Kubernetes Packages: Installing kubeadm, kubelet and kubectl
+
+Update the apt package index and install packages needed to use the Kubernetes apt repository:
+
+sudo apt-get update
+
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+
+Download the public signing key for the Kubernetes package repositories. The same signing key is used for all repositories so you can disregard the version in the URL:
+
+
+sudo mkdir -p -m 755 /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+
+sudo systemctl enable --now kubelet
+
+Enable IPv4 Forwarding:
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -p
+
+Initialize the Cluster and Master Node:
+
+kubeadm init
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl cluster-info
+
+Run this command in Master node:
+kubeadm token create --print-join-command
+
+
+
+
+----------------------------------------------------------------------------------
+--ignore-preflight-errors=...
+
+The error indicates that IPv4 packet forwarding is not enabled on the system, which is required for Kubernetes to function properly. Here's how to resolve it:
+
+Enable IPv4 Forwarding:
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -p
+
+Install calico network CNI:
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.24.1/manifests/calico.yaml -O
+kubectl apply -f calico.yaml
+
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
