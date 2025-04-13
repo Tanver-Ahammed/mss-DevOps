@@ -1,0 +1,10 @@
+---
+- name: Delete a file with 'Hello Ansible' on all VMs
+  hosts: all
+  become: true # Run as root
+  tasks:
+    - name: Remove the file /home/text.txt
+      file:
+        path: /home/text.txt
+        state: touch
+        

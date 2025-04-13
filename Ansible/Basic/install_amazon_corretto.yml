@@ -1,0 +1,41 @@
+---
+- name: Install Amazon Corretto JDK
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+        state: present
+        update_cache: yes
+
+    - name: Create keyrings directory for Amazon Corretto
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: "0755"
+
+    - name: Download Amazon Corretto GPG key
+      get_url:
+        url: https://yum.corretto.aws/corretto.key
+        dest: /etc/apt/keyrings/amazon-corretto.asc
+        mode: "0644"
+
+    - name: Add Amazon Corretto APT repository
+      copy:
+        dest: /etc/apt/sources.list.d/amazon-corretto.list
+        content: |
+          deb [arch=amd64 signed-by=/etc/apt/keyrings/amazon-corretto.asc] https://apt.corretto.aws stable main
+        mode: "0644"
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Amazon Corretto JDK 17
+      apt:
+        name: java-17-amazon-corretto-jdk
+        state: present
