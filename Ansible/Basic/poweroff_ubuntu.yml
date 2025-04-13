@@ -1,0 +1,7 @@
+---
+- name: Power off Ubuntu machine
+  hosts: all
+  become: yes # sudo privileges
+  tasks:
+    - name: Power off the machine
+      command: poweroff

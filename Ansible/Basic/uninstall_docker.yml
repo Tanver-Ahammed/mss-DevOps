@@ -1,0 +1,65 @@
+---
+- name: Uninstall Docker on all servers
+  hosts: proxy  # You can modify this to target specific groups like 'proxy' if needed
+  become: true  # Run as root
+  tasks:
+    - name: Stop Docker service
+      service:
+        name: docker
+        state: stopped
+
+    - name: Disable Docker service
+      service:
+        name: docker
+        enabled: no
+
+    - name: Remove Docker packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: absent
+
+    - name: Remove Docker dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: absent
+      when: ansible_facts.packages['docker-ce'] is defined
+
+    - name: Remove Docker configuration files if directory exists
+      file:
+        path: /etc/docker
+        state: directory
+        recurse: yes
+        mode: "0755"
+      when: ansible_facts.packages['docker-ce'] is defined and
+            ansible_facts['os']['family'] == 'Debian'
+
+    - name: Remove Docker data directory
+      file:
+        path: /var/lib/docker
+        state: directory
+        recurse: yes
+      ignore_errors: yes
+
+    - name: Remove Docker systemd service
+      file:
+        path: /etc/systemd/system/docker.service
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove Docker socket
+      file:
+        path: /var/run/docker.sock
+        state: absent
+      ignore_errors: yes
+
+    - name: Clean up unused dependencies
+      apt:
+        autoremove: yes
+        autoclean: yes
