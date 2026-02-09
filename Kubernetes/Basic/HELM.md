@@ -1,7 +1,3 @@
-Below is a **clean, structured documentation-style guide for Helm**, suitable for **learning, internal wiki, or interview prep**.
-
----
-
 # 📘 Helm Documentation
 
 ## 1️⃣ What is Helm?
